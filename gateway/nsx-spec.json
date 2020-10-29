@@ -1,0 +1,43 @@
+{
+  "Deployment": "small",
+  "DiskProvisioning": "flat",
+  "IPAllocationPolicy": "dhcpPolicy",
+  "IPProtocol": "IPv4",
+  "PropertyMapping": [
+    {
+      "Key": "nsx_passwd_0",
+      "Value": "FIXME_6"
+    },
+    {
+      "Key": "nsx_cli_passwd_0",
+      "Value": "FIXME_7"
+    },
+    {
+      "Key": "nsx_hostname",
+      "Value": "nsx-mgr"
+    },
+    {
+      "Key": "nsx_role",
+      "Value": "NSX Manager"
+    },
+    {
+      "Key": "nsx_isSSHEnabled",
+      "Value": "True"
+    },
+    {
+      "Key": "nsx_allowSSHRootLogin",
+      "Value": "True"
+    }
+  ],
+  "NetworkMapping": [
+    {
+      "Name": "Network 1",
+      "Network": "VM Network"
+    }
+  ],
+  "MarkAsTemplate": false,
+  "PowerOn": true,
+  "InjectOvfEnv": false,
+  "WaitForIP": false,
+  "Name": "nsx-mgr"
+}
