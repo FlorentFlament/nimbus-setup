@@ -50,6 +50,8 @@ TB_SPEC=$(
           {
             "name" => "Cluster",
             "dc" => "Datacenter",
+            # DRS is required to create a resource pool
+            "enableDrs" => true,
           },
         ],
       },
