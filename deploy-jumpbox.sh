@@ -22,8 +22,8 @@ export GOVC_DATASTORE=${NP_VSPHERE_DATASTORE:?}
 : ${NP_VSPHERE_NETWORK:?} # vSphere network to connect the jumpbox to
 
 # Jumpbox credentials
-: ${NP_JUMPBOX_PASSWORD:?}
 : ${NP_JUMPBOX_PUBKEY:?}
+: ${NP_JUMPBOX_TEMP_PASSWORD:="changeme"} # This has to be changed at first login
 : ${NP_JUMPBOX_OVA:="https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.ova"}
 
 echo "Using the following parameters:"
@@ -53,7 +53,7 @@ SPEC_FILE=$(cat <<EOF
         },
         {
             "Key": "password",
-            "Value": "${NP_JUMPBOX_PASSWORD}"
+            "Value": "${NP_JUMPBOX_TEMP_PASSWORD}"
         }
     ],
     "NetworkMapping": [
