@@ -9,7 +9,7 @@ set -eu
 # NP_* environment variables can be defined in the following
 # configuration file. Beware, this file will override any environment
 # variables set in the shell.
-CONFIG_FILE="${HOME}/.nimbus-platform.conf"
+CONFIG_FILE="${HOME}/.np-testbed.conf"
 if [ -f ${CONFIG_FILE} ]; then
     echo "Using ${CONFIG_FILE} configuration file."
     . ${CONFIG_FILE}
@@ -33,8 +33,11 @@ done
 TB_DEPLOY=/mts/git/bin/nimbus-testbeddeploy
 RESULTS_DIR=./tbdeploy-results-$(date -u +%Y%m%d-%H%M%S)
 
-TB_SPEC=$(
-    cat <<EOF
+# Note that apparently `nimbus-testbeddeploy` doesn't support having
+# the `testbedSpecRubyFile` provided as a named pipe. So using a
+# temporary file.
+SPEC_FILE=$(mktemp)
+cat > ${SPEC_FILE} <<EOF
 \$testbed = Proc.new do
   {
     "name" => "${NP_NAME}",
@@ -86,13 +89,6 @@ TB_SPEC=$(
   }
 end
 EOF
-    )
-
-# Note that `nimbus-testbeddeploy` doesn't support having the
-# `testbedSpecRubyFile` provided as a named pipe. So using a temporary
-# file.
-SPEC_FILE=$(mktemp)
-echo "${TB_SPEC}" >${SPEC_FILE}
 
 echo "Launching ${TB_DEPLOY} with ${SPEC_FILE} spec file..."
 ${TB_DEPLOY} \
