@@ -40,3 +40,14 @@ standing for "Nimbus Platform".
 * `NP_CPU`, `NP_RAM`, `NP_DISK`: Amount of resources to allocate for
   the ESX (in GB for RAM and DISK). Minimalist defaults should be
   provided.
+
+### Usage example
+
+```
+$ scp deploy-testbed.sh jtramiel@nimbus-gateway.eng.vmware.com:
+$ ssh jtramiel@nimbus-gateway.eng.vmware.com
+$ NP_NAME=lab0 ./deploy-testbed.sh
+```
+
+Then we can check that our lab has been successfully deployed:
+https://devhub.eng.vmware.com/console/nimbus/testbeds
