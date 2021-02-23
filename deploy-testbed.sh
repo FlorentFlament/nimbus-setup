@@ -23,7 +23,7 @@ fi
 : ${NP_VCENTER_BUILD:=ob-16860138}
 : ${NP_CPU:=2}
 : ${NP_RAM:=256} # 256 GB RAM required to deploy NSX-T ..
-: ${NP_DISK:=32}
+: ${NP_DISK:=2048} # 2 TB disk
 
 echo "Using the following parameters:"
 for v in NP_NAME NP_ESX_BUILD NP_VCENTER_BUILD NP_CPU NP_RAM NP_DISK; do
