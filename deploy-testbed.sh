@@ -22,7 +22,7 @@ fi
 : ${NP_ESX_BUILD:=ob-16850804}
 : ${NP_VCENTER_BUILD:=ob-16860138}
 : ${NP_CPU:=2}
-: ${NP_RAM:=16}
+: ${NP_RAM:=256} # 256 GB RAM required to deploy NSX-T ..
 : ${NP_DISK:=32}
 
 echo "Using the following parameters:"
@@ -91,11 +91,16 @@ end
 EOF
 
 echo "Launching ${TB_DEPLOY} with ${SPEC_FILE} spec file..."
+
+while ! \
 ${TB_DEPLOY} \
    --testbedSpecRubyFile ${SPEC_FILE} \
    --runName ${NP_NAME} \
    --esxBuild ${NP_ESX_BUILD} \
    --vcenterBuild ${NP_VCENTER_BUILD} \
    --resultsDir ${RESULTS_DIR}
+do
+    echo -e "\nFailed to deploy testbed .. Quota issue ? Retrying ..." && sleep 1
+done
 
 rm ${SPEC_FILE}
